@@ -22,7 +22,7 @@
         <div class="menus-list-item">推荐</div>
         <div class="menus-list-item">娱乐</div>
         <div class="menus-list-item" @click="goLogin">登录</div>
-        <v-btn color="primary" depressed v-ripple="false" dark>写博客</v-btn>
+        <v-btn color="primary" depressed v-ripple="false" dark @click="goEditor">写博客</v-btn>
       </div>
       <div icon class="d-md-none">
         <i class="iconfont icon-liebiao"></i>
@@ -42,6 +42,9 @@
     methods: {
       goLogin() {
         this.$router.push('/login')
+      },
+      goEditor() {
+        this.$router.push('/editor');
       }
     },
   }
@@ -62,6 +65,7 @@
   align-items: center;
   .menus-list-item {
     margin: 0 20px;
+    cursor: pointer;
   }
 }
 

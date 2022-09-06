@@ -2,10 +2,11 @@
   <v-card class="login-box mx-auto" max-width="450">
     <login-logo />
     <div class="px-14 pt-16 pb-8">
+      <v-form ref="loginForm">
       <v-text-field
         class="pb-2"
         label="邮箱"
-        v-model="loginInfo.email"
+        v-model="loginInfo.qqEmail"
         :rules="[validateEmail]"
         :validate-on-blur="true"
         single-line
@@ -25,7 +26,8 @@
         outlined
         dense
       ></v-text-field>
-      <v-btn rounded depressed color="primary" block>登录</v-btn>
+      <v-btn rounded depressed color="primary" block @click="loginHandle">登录</v-btn>
+      </v-form>
     </div>
     <v-card-text class="px-14 d-flex justify-center">
       第三方账号登录
@@ -43,6 +45,7 @@
 <script>
 // 混入LoginLogo组件及相关验证方法
 import { loginBase } from "./mixin";
+import {login} from '@/api/user'
 export default {
   mixins: [loginBase],
   data() {
@@ -51,12 +54,34 @@ export default {
       showPsw: false,
       // 登录相关信息
       loginInfo: {
-        email: "",
+        qqEmail: "",
         password: "",
       },
     };
   },
   methods: {
+    async loginHandle(){
+      if(this.$refs.loginForm.validate()){
+       const { data: res } = await login(this.loginInfo);
+       console.log(res);
+        if (res.code === 200) {
+          this.$message({
+            type: "success",
+            message: "登录成功，即将跳转到主页",
+          });
+        } else {
+          this.$message({
+            type: "error",
+            message: "登陆失败，账号，密码填写错误",
+          });
+        }
+      } else {
+        this.$message({
+          type: "warning",
+          message: "登录失败，账号密码未按要求填写",
+        });
+      }
+    },
     goRegister() {
       this.$router.push("/register");
     },

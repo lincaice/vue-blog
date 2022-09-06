@@ -23,6 +23,11 @@ const routes = [
     path: '/reset',
     name: 'reset',
     component: () => import('@/views/ResetView')
+  },
+  {
+    path: '/editor',
+    name: 'editor',
+    component: () => import('@/views/UploadArticle')
   }
 ]
 

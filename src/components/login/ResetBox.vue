@@ -4,6 +4,7 @@
     <login-logo />
     <div class="px-14 pt-6 pb-8">
       <v-card-title class="justify-center">找回密码</v-card-title>
+      <v-form ref="resetForm">
       <v-text-field
         class="pb-2"
         label="邮箱"
@@ -45,6 +46,7 @@
         </v-col>
       </v-row>
       <v-btn rounded depressed color="primary" block>注册</v-btn>
+      </v-form>
     </div>
     <v-card-actions class="px-12 justify-center">
       <v-btn color="orange" text small dense @click="goLogin">返回登录</v-btn>
